@@ -1,0 +1,264 @@
+@charset "utf-8";
+
+body{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+// 播放层
+.wrap-main{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #a7957b;
+	overflow: hidden;
+	text-align: center;
+	color: #14121e;
+}
+.wrap-main-bg{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-image: url("../images/hsym@3x.jpg");
+	background-size: cover;
+	background-position: center center;
+	z-index: -1;
+	&.show{
+		@include animation(bgShow 1s both);
+	}
+	&.leave{
+		@include animation(bgLeave 0.6s both);
+	}
+
+
+}
+// 指针开始
+.wrap-needle{
+	position: absolute;
+	right: 50%;
+	top: 0.28rem;
+	@include transform(translate(1.9rem,0));
+	padding-top: 25px;
+}
+.icon-axis{
+	position: absolute;
+	right: -20px;
+    top: 0;
+	@include background("../images/icon-axis.png",56px,56px);
+	background-image: -webkit-image-set(url("../images/icon-axis.png") 2x,url('../images/icon-axis@3x.png') 3x);
+}
+.icon-needle{
+	@include background("../images/icon-needle.png",86px,135px);
+	background-image: -webkit-image-set(url("../images/icon-needle.png") 2x,url('../images/icon-needle@3x.png') 3x);
+	&.default{
+		@include transform(rotate(40deg));
+		@include transform-origin(right,top);
+		@include transition(all 0.3s);
+	}
+	&.down{
+		@include transform(rotate(0));
+		@include transform-origin(right,top);
+		@include transition(all 0.3s);
+	}
+	&.animation{
+		@include transform-origin(right,top);
+		@include animation(needleMove 0.5s both);
+	}
+
+}
+// 指针结束
+// 标题
+.main-title{
+	font-size: 24px;
+	line-height: 30px;
+	padding-top: 0.16rem;
+}
+// 作者
+.main-author{
+	line-height: 30px;
+	&:before, &:after{
+		content:"";
+		display: inline-block;
+		width: 20px;
+		height: 1px;
+		background-color: #14121e;
+		vertical-align: middle;
+	}
+	&:before{
+		margin-right: 6px;
+	}
+	&:after{
+		margin-left: 6px;
+	}
+}
+// 磁盘开始
+.wrap-disk{
+	width: 600%;
+	height: 3.6rem;
+	@include display-flex();
+	margin-top: 0.15rem;
+	@include transition(all 0.4s);
+}
+.disk{
+	@include flex();
+}
+.disk-bg{
+	margin: 0 auto;
+	width: 3.58rem;
+	height: 3.58rem;
+	background: url("../images/icon-disk.png") no-repeat;
+	background-image: -webkit-image-set(url("../images/icon-disk.png") 2x,url('../images/icon-disk@3x.png') 3x);
+	background-size: 100% 100%;
+	padding: 0.4rem;
+	&.roll{
+		.disk-cover{
+			@include animation(roll 15s infinite linear);
+		}
+	}
+}
+.disk-cover{
+	width: 100%;
+	height: 100%;
+	@include border-radius(50%);
+	&.disk-cover-1{
+		background: url("../images/hsym.jpg") no-repeat;
+		background-image: -webkit-image-set(url("../images/hsym.jpg") 2x,url('../images/hsym@3x.jpg') 3x);
+		background-size: 100% 100%;
+	}
+	&.disk-cover-2{
+		background: url("../images/kblk.jpg") no-repeat;
+		background-image: -webkit-image-set(url("../images/kblk.jpg") 2x,url('../images/kblk@3x.jpg') 3x);
+		background-size: 100% 100%;
+	}
+	&.disk-cover-3{
+		background: url("../images/gq.jpg") no-repeat;
+		background-image: -webkit-image-set(url("../images/gq.jpg") 2x,url('../images/gq@3x.jpg') 3x);
+		background-size: 100% 100%;
+	}
+	&.disk-cover-4{
+		background: url("../images/yq.jpg") no-repeat;
+		background-image: -webkit-image-set(url("../images/yq.jpg") 2x,url('../images/yq@3x.jpg') 3x);
+		background-size: 100% 100%;
+	}
+	&.disk-cover-5{
+		background: url("../images/bnsdmm.jpg") no-repeat;
+		background-image: -webkit-image-set(url("../images/bnsdmm.jpg") 2x,url('../images/bnsdmm@3x.jpg') 3x);
+		background-size: 100% 100%;
+	}
+	&.disk-cover-6{
+		background: url("../images/qsqr.jpg") no-repeat;
+		background-image: -webkit-image-set(url("../images/qsqr.jpg") 2x,url('../images/qsqr@3x.jpg') 3x);
+		background-size: 100% 100%;
+	}
+}
+// 磁盘结束
+// 背景音乐介绍
+.main-desc{
+	font-size: 10px;
+	margin: 0.15rem;
+	opacity: 0.8;
+}
+// 播放控制区
+.wrap-control{
+	position: relative;
+	width: 100%;
+}
+.btn-control{
+	margin: 0 auto;
+	@include background-full("../images/btn-play.png",0.71rem,0.71rem);
+	background-image: -webkit-image-set(url("../images/btn-play.png") 2x,url('../images/btn-play@3x.png') 3x);
+	&.pause{
+		@include background-full("../images/btn-pause.png",0.71rem,0.71rem);
+		background-image: -webkit-image-set(url("../images/btn-pause.png") 2x,url('../images/btn-pause@3x.png') 3x);
+	}
+}
+.btn-pre{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	@include transform(translate(-1.1rem,-50%));
+	@include background-full("../images/btn-pre.png",0.41rem,0.41rem);
+	background-image: -webkit-image-set(url("../images/btn-pre.png") 2x,url('../images/btn-pre@3x.png') 3x);
+	display: none;
+}
+.btn-next{
+	position: absolute;
+	right: 50%;
+	top: 50%;
+	@include transform(translate(1.1rem,-50%));
+	@include background-full("../images/btn-next.png",0.41rem,0.41rem);
+	background-image: -webkit-image-set(url("../images/btn-next.png") 2x,url('../images/btn-next@3x.png') 3x);
+}
+// 引导层开始
+.wrap-guide{
+	width: 100%;
+	height: 100%;
+	background: url("../images/final-bg.jpg") no-repeat;
+	background-image: -webkit-image-set(url("../images/final-bg.jpg") 2x,url('../images/final-bg@3x.jpg') 3x);
+	background-size: 100% 100%;
+}
+// 引导层结束
+
+// 磁盘转动动画
+@-webkit-keyframes roll{
+	100%{
+		@include transform(rotate(360deg));
+	}
+}
+@keyframes roll{
+	100%{
+		@include transform(rotate(360deg));
+	}
+}
+// 指针动画
+@-webkit-keyframes needleMove{
+	50%{
+		@include transform(rotate(40deg));
+	}
+	100%{
+		@include transform(rotate(0));
+	}
+}
+@keyframes needleMove{
+	50%{
+		@include transform(rotate(40deg));
+	}
+	100%{
+		@include transform(rotate(0));
+	}
+}
+// 背景淡入淡出动画
+@-webkit-keyframes bgShow{
+	0%{
+		opacity: 0;
+	}
+	100%{
+		opacity: 0.2;
+	}
+}
+@keyframes bgShow{
+	0%{
+		opacity: 0;
+	}
+	100%{
+		opacity: 0.2;
+	}
+}
+@-webkit-keyframes bgLeave{
+	0%{
+		opacity: 0.2;
+	}
+	100%{
+		opacity: 0;
+	}
+}
+@keyframes bgLeave{
+	0%{
+		opacity: 0.2;
+	}
+	100%{
+		opacity: 0;
+	}
+}

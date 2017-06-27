@@ -1,0 +1,19 @@
+@charset "utf-8";
+
+$elements:wrap-guide, wrap-main, wrap-needle, icon-axis, wrap-cover;
+
+.wrap-main{
+    z-index: index($elements,wrap-main);
+}
+.wrap-needle{
+    z-index: index($elements,wrap-needle);
+}
+.icon-axis{
+    z-index: index($elements,icon-axis);
+}
+.wrap-cover{
+    z-index: index($elements,wrap-cover);
+}
+.wrap-guide{
+    z-index: index($elements,wrap-guide);
+}

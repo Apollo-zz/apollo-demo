@@ -1,0 +1,535 @@
+@mixin user-select($select) {
+    -webkit-user-select: $select;
+    -moz-user-select: $select;
+    -ms-user-select: $select;
+    user-select: $select;
+}
+// Border Radius Mixins
+// --------------------------------------------------
+
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -o-border-radius: $radius;
+    border-radius: $radius;
+}
+// Box sizing
+// --------------------------------------------------
+
+@mixin box-sizing($boxmodel) {
+    -webkit-box-sizing: $boxmodel;
+    -moz-box-sizing: $boxmodel;
+    box-sizing: $boxmodel;
+}
+@mixin btn-style($color-btn) {
+    background-color: $color-btn;
+    color: #ffffff;
+    border: none;
+    &:active,&:hover{
+        background-color: darken($color-btn,5%);
+    }
+    &:disabled{
+        background-color: $color-btn-disabled;
+        cursor: not-allowed;
+    }
+}
+@mixin btn-border-style($color-btn,$btn-radius:3px) {
+    background-color: transparent;
+    color: $color-btn;
+    border: solid 1px $color-btn;
+    position: relative;
+    &:active,&:hover{
+        border-color: darken($color-btn,5%);
+        color: darken($color-btn,5%);
+    }
+    &:disabled{
+        color: $color-btn-disabled;
+        border-color: $color-btn-disabled;
+        cursor: not-allowed;
+    }
+}
+@mixin background($url, $width, $height:$width, $left: 0, $top: 0) {
+    background-image: url($url);
+    background-position: $left $top;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: $width;
+    height: $height;
+    display: inline-block;
+}
+@mixin background-contain($url) {
+    background-image: url($url);
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+@mixin background-full($url, $width, $height:$width, $left: 0, $top: 0) {
+    background-image: url($url);
+    background-position: $left $top;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: $width;
+    height: $height;
+}
+@mixin transform($val) {
+    -webkit-transform: $val;
+    -moz-transform: $val;
+    transform: $val;
+}
+@mixin transform-origin($left, $top) {
+    -webkit-transform-origin: $left $top;
+    -moz-transform-origin: $left $top;
+    transform-origin: $left $top;
+}
+@mixin translate($x, $y) {
+    @include transform( translate($x, $y) );
+}
+@mixin transition($transition){
+    -webkit-transition: $transition;
+    -moz-transition: $transition;
+    transition: $transition;
+}
+//ele right
+@mixin el-rt($icon-right)
+{
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    @include transform(translate(0,-50%));
+    right: $icon-right;
+}
+//ele left
+@mixin el-lt($icon-left,$top:50%)
+{
+    display: inline-block;
+    position: absolute;
+    top: $top;
+    @include transform(translate(0,-50%));
+    left: $icon-left;
+}
+//底部信息
+@mixin footer-info(){
+    position: absolute;
+    bottom: 0.1rem;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+}
+//居中
+@mixin center(){
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    @include transform(translate(-50%,-50%));
+}
+//
+@mixin triangle-up($width-lg,$width-sm,$bg-color){
+    content: "";
+    display: block;
+    border-bottom: solid $width-lg $bg-color;
+    border-right: solid $width-sm transparent;
+    border-left: solid $width-sm transparent;
+}
+// Animation Mixins
+// --------------------------------------------------
+
+@mixin animation($animation) {
+    -webkit-animation: $animation;
+    -moz-animation: $animation;
+    animation: $animation;
+}
+@mixin animation-duration($duration) {
+    -webkit-animation-duration: $duration;
+    -moz-animation-duration: $duration;
+    animation-duration: $duration;
+}
+@mixin animation-direction($direction) {
+    -webkit-animation-direction: $direction;
+    -moz-animation-direction: $direction;
+    animation-direction: $direction;
+}
+@mixin animation-timing-function($animation-timing) {
+    -webkit-animation-timing-function: $animation-timing;
+    -moz-animation-timing-function: $animation-timing;
+    animation-timing-function: $animation-timing;
+}
+@mixin animation-fill-mode($fill-mode) {
+    -webkit-animation-fill-mode: $fill-mode;
+    -moz-animation-fill-mode: $fill-mode;
+    animation-fill-mode: $fill-mode;
+}
+@mixin animation-name($name) {
+    -webkit-animation-name: $name;
+    -moz-animation-name: $name;
+    animation-name: $name;
+}
+@mixin animation-iteration-count($count) {
+    -webkit-animation-iteration-count: $count;
+    -moz-animation-iteration-count: $count;
+    animation-iteration-count: $count;
+}
+// Box shadows
+// --------------------------------------------------
+
+@mixin box-shadow($shadow...) {
+    -webkit-box-shadow: $shadow;
+    -moz-box-shadow: $shadow;
+    box-shadow: $shadow;
+}
+// Flexbox Mixins
+// --------------------------------------------------
+// http://philipwalton.github.io/solved-by-flexbox/
+// https://github.com/philipwalton/solved-by-flexbox
+
+@mixin display-flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+@mixin dislay-inline-flex {
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: -moz-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+}
+
+@mixin flex-direction($value: row) {
+    @if $value == row-reverse {
+        -webkit-box-direction: reverse;
+        -webkit-box-orient: horizontal;
+    } @else if $value == column {
+        -webkit-box-direction: normal;
+        -webkit-box-orient: vertical;
+    } @else if $value == column-reverse {
+        -webkit-box-direction: reverse;
+        -webkit-box-orient: vertical;
+    } @else {
+        -webkit-box-direction: normal;
+        -webkit-box-orient: horizontal;
+    }
+    -webkit-flex-direction: $value;
+    -moz-flex-direction: $value;
+    -ms-flex-direction: $value;
+    flex-direction: $value;
+}
+
+@mixin flex-wrap($value: nowrap) {
+    // No Webkit Box fallback.
+    -webkit-flex-wrap: $value;
+    -moz-flex-wrap: $value;
+    @if $value == nowrap {
+        -ms-flex-wrap: none;
+    } @else {
+        -ms-flex-wrap: $value;
+    }
+    flex-wrap: $value;
+}
+
+@mixin flex($fg: 1, $fs: null, $fb: null) {
+    -webkit-box-flex: $fg;
+    -webkit-flex: $fg $fs $fb;
+    -moz-box-flex: $fg;
+    -moz-flex: $fg $fs $fb;
+    -ms-flex: $fg $fs $fb;
+    flex: $fg $fs $fb;
+}
+
+@mixin flex-flow($values: (row nowrap)) {
+    // No Webkit Box fallback.
+    -webkit-flex-flow: $values;
+    -moz-flex-flow: $values;
+    -ms-flex-flow: $values;
+    flex-flow: $values;
+}
+
+@mixin align-items($value: stretch) {
+    @if $value == flex-start {
+        -webkit-box-align: start;
+        -ms-flex-align: start;
+    } @else if $value == flex-end {
+        -webkit-box-align: end;
+        -ms-flex-align: end;
+    } @else {
+        -webkit-box-align: $value;
+        -ms-flex-align: $value;
+    }
+    -webkit-align-items: $value;
+    -moz-align-items: $value;
+    align-items: $value;
+}
+
+@mixin align-self($value: auto) {
+    -webkit-align-self: $value;
+    -moz-align-self: $value;
+    @if $value == flex-start {
+        -ms-flex-item-align: start;
+    } @else if $value == flex-end {
+        -ms-flex-item-align: end;
+    } @else {
+        -ms-flex-item-align: $value;
+    }
+    align-self: $value;
+}
+
+@mixin align-content($value: stretch) {
+    -webkit-align-content: $value;
+    -moz-align-content: $value;
+    @if $value == flex-start {
+        -ms-flex-line-pack: start;
+    } @else if $value == flex-end {
+        -ms-flex-line-pack: end;
+    } @else {
+        -ms-flex-line-pack: $value;
+    }
+    align-content: $value;
+}
+@mixin flex-grow($value: 1) {
+    -webkit-flex-grow: $value;
+    -moz-flex-grow: $value;
+    flex-wrap: $value;
+}
+@mixin flex-shrink($value: 1) {
+    -webkit-flex-shrink: $value;
+    -moz-flex-shrink: $value;
+    flex-wrap: $value;
+}
+@mixin justify-content($value: stretch) {
+    @if $value == flex-start {
+        -webkit-box-pack: start;
+        -ms-flex-pack: start;
+    } @else if $value == flex-end {
+        -webkit-box-pack: end;
+        -ms-flex-pack: end;
+    } @else if $value == space-between {
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+    } @else {
+        -webkit-box-pack: $value;
+        -ms-flex-pack: $value;
+    }
+    -webkit-justify-content: $value;
+    -moz-justify-content: $value;
+    justify-content: $value;
+}
+
+@mixin responsive-grid-break($selector, $max-width) {
+    @media (max-width: $max-width) {
+        #{$selector} {
+            -webkit-box-direction: normal;
+            -moz-box-direction: normal;
+            -webkit-box-orient: vertical;
+            -moz-box-orient: vertical;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+
+            .col, .col-10, .col-20, .col-25, .col-33, .col-34, .col-50, .col-66, .col-67, .col-75, .col-80, .col-90 {
+                @include flex(1);
+                margin-bottom: ($grid-padding-width * 3) / 2;
+                margin-left: 0;
+                max-width: 100%;
+                width: 100%;
+            }
+        }
+    }
+}
+// Placeholder text
+// --------------------------------------------------
+
+@mixin placeholder($color: $color-input-placeholder, $text-indent: 0,$font-size:$input-placeholder-font-size) {
+    &::-moz-placeholder { /* Firefox 19+ */
+        color: $color;
+        font-size: $font-size;
+        text-indent: $text-indent;
+    }
+    &:-ms-input-placeholder {
+        color: $color;
+        font-size: $font-size;
+        text-indent: $text-indent;
+    }
+    &::-webkit-input-placeholder {
+        color: $color;
+        // Safari placeholder margin issue
+        text-indent: $text-indent;
+        font-size: $font-size;
+    }
+}
+//ellipsis
+@mixin ellipsis(){
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+//word-break
+@mixin word-break(){
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: normal;
+}
+// Clearfix
+// --------------------------------------------------
+
+@mixin clearfix {
+    *zoom: 1;
+    &:before,
+    &:after {
+        display: table;
+        content: "";
+        line-height: 0;
+    }
+    &:after {
+        clear: both;
+    }
+}
+//retina border
+@mixin retina-border($scale ,$border-top:0,$border-right:0,$border-bottom:0,$border-left:0,$border-color:#f1f1f1,$border-radius:0){
+    content: '';
+    @include box-sizing(border-box);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    height: 100% * $scale;
+    width: 100% * $scale;
+    pointer-events: none;
+    @include transform(scale(1 / $scale));
+    @include transform-origin(0,0);
+    border-top: solid $border-top $border-color;
+    border-right: solid $border-right $border-color;
+    border-bottom: solid $border-bottom $border-color;
+    border-left: solid $border-left $border-color;
+    @include border-radius($border-radius * $scale);
+}
+//retina border before
+@mixin retina-border-before($border-top:0,$border-right:0,$border-bottom:0,$border-left:0,$border-color:#f1f1f1,$border-radius:0){
+    &:before{
+        @include retina-border(1,$border-top,$border-right,$border-bottom,$border-left,$border-color,$border-radius);
+    }
+    @media (-webkit-min-device-pixel-ratio: 2){
+        &:before{
+            @include retina-border(2,$border-top,$border-right,$border-bottom,$border-left,$border-color,$border-radius);
+        }
+    }
+    @media (-webkit-min-device-pixel-ratio: 3){
+        &:before{
+            @include retina-border(3,$border-top,$border-right,$border-bottom,$border-left,$border-color,$border-radius);
+        }
+    }
+}
+//retina border after
+@mixin retina-border-after($border-top:0,$border-right:0,$border-bottom:0,$border-left:0,$border-color:#f1f1f1,$border-radius:0){
+    &:after{
+        @include retina-border(1,$border-top,$border-right,$border-bottom,$border-left,$border-color,$border-radius);
+    }
+    @media (-webkit-min-device-pixel-ratio: 2){
+        &:after{
+            @include retina-border(2,$border-top,$border-right,$border-bottom,$border-left,$border-color,$border-radius);
+        }
+    }
+    @media (-webkit-min-device-pixel-ratio: 3){
+        &:after{
+            @include retina-border(3,$border-top,$border-right,$border-bottom,$border-left,$border-color,$border-radius);
+        }
+    }
+}
+//retina border radius
+// @mixin retina-border-radius($scale ,$border-radius,$border-color:#eee){
+//     content: '';
+//     @include box-sizing(border-box);
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     display: block;
+//     height: 100% * $scale;
+//     width: 100% * $scale;
+//     @include transform(scale(1 / $scale));
+//     transform-origin: 0 0;
+//     border: solid 1px $border-color;
+//     @include border-radius($border-radius * $scale);
+// }
+//only for retina-border-color-radius
+@mixin retina-box($scale){
+    content:'';
+    display: block;
+    width: 100%*$scale;
+    height: 100%*$scale;
+    pointer-events: none;
+    @include transform(scale(1 / $scale));
+    @include transform-origin(0,0);
+    @include box-sizing(border-box);
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+// retina-border-color-radius
+@mixin retina-border-color-radius($border-color:#eee,$border-radius:0){
+    &:before{
+        border: 1px solid $border-color;
+        @include retina-box(1);
+        @include border-radius($border-radius);
+    }
+    @media (-webkit-min-device-pixel-ratio: 2){
+        &:before{
+            border: 1px solid $border-color;
+            @include retina-box(2);
+            @include border-radius($border-radius*2);
+        }
+    }
+    @media (-webkit-min-device-pixel-ratio: 3){
+        &:before{
+            border: 1px solid $border-color;
+            @include retina-box(3);
+            @include border-radius($border-radius*3);
+        }
+    }
+}
+
+@mixin retina-border-color-radius-after($border-color:#eee,$border-radius:0){
+    &:after{
+        border: 1px solid $border-color;
+        @include retina-box(1);
+        @include border-radius($border-radius);
+    }
+    @media (-webkit-min-device-pixel-ratio: 2){
+        &:after{
+            border: 1px solid $border-color;
+            @include retina-box(2);
+            @include border-radius($border-radius*2);
+        }
+    }
+    @media (-webkit-min-device-pixel-ratio: 3){
+        &:after{
+            border: 1px solid $border-color;
+            @include retina-box(3);
+            @include border-radius($border-radius*3);
+        }
+    }
+}
+
+//wrap-pop
+@mixin wrap-pop($width,$margin-top,$padding,$height:auto){
+    width: $width;
+    height: $height;
+    margin:$margin-top auto 0 auto;
+    padding: $padding;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    @include transform(translate(-50%,-50%));
+    background: #fff;
+}
+
+//appearance
+@mixin appearance($appearance){
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
