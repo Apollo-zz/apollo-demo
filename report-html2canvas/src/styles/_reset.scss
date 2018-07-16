@@ -1,0 +1,203 @@
+@charset "UTF-8";
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, sub, sup, tt, var,
+b, i, u, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, fieldset,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+    font: inherit;
+    font-size: 100%;
+    word-break: break-all;
+}
+b{
+    font-weight: bold;
+}
+ol, ul {
+    list-style: none;
+}
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%; /* 2 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+    // background-color: $bg;
+    // color: $color-normal;
+}
+// Remove default margin.
+body {
+    margin: 0;
+    line-height: 1.5;
+    font-size: 14px;
+}
+// Remove default outlines.
+a,
+button,
+:focus,
+a:focus,
+button:focus,
+a:active,
+a:hover {
+    outline: 0;
+}
+// Remove tap highlight color
+a {
+    -webkit-user-drag: none;
+    text-decoration: none;
+    color: inherit;
+    &[href]:hover {
+        cursor: pointer;
+    }
+}
+
+/* ==========================================================================
+     Typography
+     ========================================================================== */
+/**
+ * 1. Correct font family not being inherited in all browsers.
+ * 2. Correct font size not being inherited in all browsers.
+ * 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome.
+ * 4. Remove any default :focus styles
+ * 5. Make sure webkit font smoothing is being inherited
+ * 6. Remove default gradient in Android Firefox / FirefoxOS
+ */
+button,
+input,
+select,
+textarea {
+    margin: 0; /* 3 */
+    font-size: 100%; /* 2 */
+    font-family: inherit; /* 1 */
+    outline-offset: 0; /* 4 */
+    outline-style: none; /* 4 */
+    outline-width: 0; /* 4 */
+    -webkit-font-smoothing: inherit; /* 5 */
+    background-image: none; /* 6 */
+    @include placeholder;
+    text-indent: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+/*
+ * Address Firefox 4+ setting `line-height` on `input` using `importnt` in
+ * the UA stylesheet.
+ */
+
+button,
+input {
+    line-height: normal;
+}
+/*
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Chrome, Safari 5+, and IE 8+.
+ * Correct `select` style inheritance in Firefox 4+ and Opera.
+ */
+button,
+select {
+    text-transform: none;
+    background-color: transparent;
+}
+/*
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *  and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *  `input` and others.
+ */
+button,
+html input[type="button"], /* 1 */
+input[type="reset"],
+input[type="submit"] {
+    cursor: pointer; /* 3 */
+    -webkit-appearance: button; /* 2 */
+}
+/*
+ * Re-set default cursor for disabled elements.
+ */
+button[disabled],
+html input[disabled] {
+    cursor: default;
+}
+/*
+ * Remove inner padding and border in Firefox 4+.
+ */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+/*
+ * 1. Remove default vertical scrollbar in IE 8/9.
+ * 2. Improve readability and alignment in all browsers.
+ */
+img {
+    -webkit-user-drag: none;
+}
+/* ==========================================================================
+     Tables
+     ========================================================================== */
+/*
+ * Remove most spacing between table cells.
+ */
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+html {
+    // min-width: 1100px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+body {
+    position: relative;
+    min-width: 320px;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling:touch;
+    overflow-scrolling:touch;
+    font-family: "Microsoft Yahei", Arial, "Lucida Grande",STHeiTi, sans-serif;
+    // font-family:"Droid San", "Helvetica Neue", Helvetica, Arial,"Droid Sans Fallback", Heiti SC, sans-serif;
+    // font-family:Arial, "Lucida Grande",STHeiTi, sans-serif;
+}
+form {
+    input{
+        border: 0;
+    }
+}
+input,select,textarea {
+    border: none;
+    border: 0;
+    @include border-radius(0);
+}
+div,p,span,input,button,a,label,textarea,header,table,tr,td {
+    -webkit-tap-highlight-color:rgba(255,255,255,0);
+    @include box-sizing(border-box);
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+button {
+    padding: 0; //在低版本安卓会有默认的padding
+}
+
+input::-ms-clear {
+    display: none;
+}
+input::-ms-reveal {
+    display: none;
+}
