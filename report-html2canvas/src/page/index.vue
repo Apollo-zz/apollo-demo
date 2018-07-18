@@ -272,8 +272,9 @@ export default {
             localStorage.setItem(`reportData${this.info.time}`,JSON.stringify(this.info));
             setTimeout(()=>{
                 const el = this.$refs.print;
+                const canvasImg = this.$refs.canvasImg;
                 html2canvas(el).then(canvas => {
-                    // canvasImg.appendChild(canvas);
+                    canvasImg.appendChild(canvas);
                     this.href=canvas.toDataURL("image/png");
                     this.download =`运营简报${this.info.time}`;
                 });
@@ -523,7 +524,7 @@ export default {
                 <span class="icon-delete" v-else @click="showDeteleMask('otherNotices',index)"></span>
             </label>
         </div>
-        <div class="wrap-page-content" v-if="!isInputPage">
+        <div class="wrap-page-content" v-else-if="!isInputPage">
             <header class="wrap-page-header">
                 <h2 class="header-title">运维简报</h2>
                 <div class="header-time">{{info.time}}</div>
@@ -572,107 +573,116 @@ export default {
             <div class="wrap-container">
                 <h3 class="container-title">事件单量</h3>
                 <div class="display-flex flex-start">
-                    <div class="flex wrap-inner">
-                        <h4 class="inner-tips" :class="info.eventsAlertColor">处理告警事件单量</h4>
-                        <div class="wrap-detail">
-                            <div class="detail-header">
-                                <span class="detail-title">零售域</span>
-                                <div class="detail-bar" :style="'width:'+ (+info.events.eventsAlertRetail.count/info.maxCount*300) +'px'"></div>
-                                <span class="detail-num">{{info.events.eventsAlertRetail.count || 0}}个</span>
+                    <div class="flex wrap-inner" :class="info.eventsAlertColor">
+                        <h4 class="inner-tips">处理告警事件单量</h4>
+                        <div class="list">
+                            <div class="wrap-detail">
+                                <div class="detail-header">
+                                    <span class="detail-title">零售域</span>
+                                    <div class="detail-bar" :style="'width:'+ (+info.events.eventsAlertRetail.count/info.maxCount*300) +'px'"></div>
+                                    <span class="detail-num">{{info.events.eventsAlertRetail.count || 0}}个</span>
+                                </div>
+                                <ul class="detail-list">
+                                    <li class="detail-item" v-for="(item,index) in info.events.eventsAlertRetail.desc" :key="index" v-if="!!item.value">{{item.value}}</li>
+                                    <li class="color-description" v-else>无</li>
+                                </ul>
                             </div>
-                            <ul class="detail-list">
-                                <li class="detail-item" v-for="(item,index) in info.events.eventsAlertRetail.desc" :key="index" v-if="!!item.value">{{item.value}}</li>
-                                <li class="color-description" v-else>无</li>
-                            </ul>
-                        </div>
-                        <div class="wrap-detail">
-                            <div class="detail-header">
-                                <span class="detail-title">平台域</span>
-                                <div class="detail-bar" :style="'width:'+ (+info.events.eventsAlertApart.count/info.maxCount*300) +'px'"></div>
-                                <span class="detail-num">{{info.events.eventsAlertApart.count || 0}}个</span>
+                            <div class="wrap-detail">
+                                <div class="detail-header">
+                                    <span class="detail-title">平台域</span>
+                                    <div class="detail-bar" :style="'width:'+ (+info.events.eventsAlertApart.count/info.maxCount*300) +'px'"></div>
+                                    <span class="detail-num">{{info.events.eventsAlertApart.count || 0}}个</span>
+                                </div>
+                                <ul class="detail-list">
+                                    <li class="detail-item" v-for="(item,index) in info.events.eventsAlertApart.desc" :key="index" v-if="!!item.value">{{item.value}}</li>
+                                    <li class="color-description" v-else>无</li>
+                                </ul>
                             </div>
-                            <ul class="detail-list">
-                                <li class="detail-item" v-for="(item,index) in info.events.eventsAlertApart.desc" :key="index" v-if="!!item.value">{{item.value}}</li>
-                                <li class="color-description" v-else>无</li>
-                            </ul>
                         </div>
                     </div>
-                    <div class="flex wrap-inner">
-                        <h4 class="inner-tips" :class="info.eventsClosedColor">关闭事件单量</h4>
-                        <div class="wrap-detail">
-                            <div class="detail-header">
-                                <span class="detail-title">零售域</span>
-                                <div class="detail-bar" :style="'width:'+ (+info.events.eventsClosedRetail.count/info.maxCount*300) +'px'"></div>
-                                <span class="detail-num">{{info.events.eventsClosedRetail.count || 0}}个</span>
+                    <div class="flex wrap-inner" :class="info.eventsClosedColor">
+                        <h4 class="inner-tips">关闭事件单量</h4>
+                        <div class="list">
+                            <div class="wrap-detail">
+                                <div class="detail-header">
+                                    <span class="detail-title">零售域</span>
+                                    <div class="detail-bar" :style="'width:'+ (+info.events.eventsClosedRetail.count/info.maxCount*300) +'px'"></div>
+                                    <span class="detail-num">{{info.events.eventsClosedRetail.count || 0}}个</span>
+                                </div>
+                                <ul class="detail-list">
+                                    <li class="detail-item" v-for="(item,index) in info.events.eventsClosedRetail.desc" :key="index" v-if="!!item.value">{{item.value}}</li>
+                                    <li class="color-description" v-else>无</li>
+                                </ul>
                             </div>
-                            <ul class="detail-list">
-                                <li class="detail-item" v-for="(item,index) in info.events.eventsClosedRetail.desc" :key="index" v-if="!!item.value">{{item.value}}</li>
-                                <li class="color-description" v-else>无</li>
-                            </ul>
-                        </div>
-                        <div class="wrap-detail">
-                            <div class="detail-header">
-                                <span class="detail-title">平台域</span>
-                                <div class="detail-bar" :style="'width:'+ (+info.events.eventsClosedApart.count/info.maxCount*300) +'px'"></div>
-                                <span class="detail-num">{{info.events.eventsClosedApart.count || 0}}个</span>
+                            <div class="wrap-detail">
+                                <div class="detail-header">
+                                    <span class="detail-title">平台域</span>
+                                    <div class="detail-bar" :style="'width:'+ (+info.events.eventsClosedApart.count/info.maxCount*300) +'px'"></div>
+                                    <span class="detail-num">{{info.events.eventsClosedApart.count || 0}}个</span>
+                                </div>
+                                <ul class="detail-list">
+                                    <li class="detail-item" v-for="(item,index) in info.events.eventsClosedApart.desc" :key="index" v-if="!!item.value">{{item.value}}</li>
+                                    <li class="color-description" v-else>无</li>
+                                </ul>
                             </div>
-                            <ul class="detail-list">
-                                <li class="detail-item" v-for="(item,index) in info.events.eventsClosedApart.desc" :key="index" v-if="!!item.value">{{item.value}}</li>
-                                <li class="color-description" v-else>无</li>
-                            </ul>
                         </div>
+                        
                     </div>
                 </div>
                 <div class="divider"></div>
                 <div class="display-flex flex-start">
-                    <div class="flex wrap-inner">
-                        <h4 class="inner-tips" :class="info.eventsFollowColor">待跟进事件单量</h4>
-                        <div class="wrap-detail">
-                            <div class="detail-header">
-                                <span class="detail-title">零售域</span>
-                                <div class="detail-bar" :style="'width:'+ (+info.events.eventsFollowRetail.count/info.maxCount*300) +'px'"></div>
-                                <span class="detail-num">{{info.events.eventsFollowRetail.count || 0}}个</span>
+                    <div class="flex wrap-inner" :class="info.eventsFollowColor">
+                        <h4 class="inner-tips">待跟进事件单量</h4>
+                        <div class="list">
+                            <div class="wrap-detail">
+                                <div class="detail-header">
+                                    <span class="detail-title">零售域</span>
+                                    <div class="detail-bar" :style="'width:'+ (+info.events.eventsFollowRetail.count/info.maxCount*300) +'px'"></div>
+                                    <span class="detail-num">{{info.events.eventsFollowRetail.count || 0}}个</span>
+                                </div>
+                                <ul class="detail-list">
+                                    <li class="detail-item" v-for="(item,index) in info.events.eventsFollowRetail.desc" :key="index" v-if="!!item.value">{{item.value}}</li>
+                                    <li class="color-description" v-else>无</li>
+                                </ul>
                             </div>
-                            <ul class="detail-list">
-                                <li class="detail-item" v-for="(item,index) in info.events.eventsFollowRetail.desc" :key="index" v-if="!!item.value">{{item.value}}</li>
-                                <li class="color-description" v-else>无</li>
-                            </ul>
-                        </div>
-                        <div class="wrap-detail">
-                            <div class="detail-header">
-                                <span class="detail-title">平台域</span>
-                                <div class="detail-bar" :style="'width:'+ (+info.events.eventsFollowApart.count/info.maxCount*300) +'px'"></div>
-                                <span class="detail-num">{{info.events.eventsFollowApart.count || 0}}个</span>
+                            <div class="wrap-detail">
+                                <div class="detail-header">
+                                    <span class="detail-title">平台域</span>
+                                    <div class="detail-bar" :style="'width:'+ (+info.events.eventsFollowApart.count/info.maxCount*300) +'px'"></div>
+                                    <span class="detail-num">{{info.events.eventsFollowApart.count || 0}}个</span>
+                                </div>
+                                <ul class="detail-list">
+                                    <li class="detail-item" v-for="(item,index) in info.events.eventsFollowApart.desc" :key="index" v-if="!!item.value">{{item.value}}</li>
+                                    <li class="color-description" v-else>无</li>
+                                </ul>
                             </div>
-                            <ul class="detail-list">
-                                <li class="detail-item" v-for="(item,index) in info.events.eventsFollowApart.desc" :key="index" v-if="!!item.value">{{item.value}}</li>
-                                <li class="color-description" v-else>无</li>
-                            </ul>
                         </div>
                     </div>
-                    <div class="flex wrap-inner">
-                        <h4 class="inner-tips" :class="info.eventsServiceColor">处理服务请求单</h4>
-                        <div class="wrap-detail">
-                            <div class="detail-header">
-                                <span class="detail-title">零售域</span>
-                                <div class="detail-bar" :style="'width:'+ (+info.events.eventsServiceRetail.count/info.maxCount*300) +'px'"></div>
-                                <span class="detail-num">{{info.events.eventsServiceRetail.count || 0}}个</span>
+                    <div class="flex wrap-inner" :class="info.eventsServiceColor">
+                        <h4 class="inner-tips">处理服务请求单</h4>
+                        <div class="list">
+                            <div class="wrap-detail">
+                                <div class="detail-header">
+                                    <span class="detail-title">零售域</span>
+                                    <div class="detail-bar" :style="'width:'+ (+info.events.eventsServiceRetail.count/info.maxCount*300) +'px'"></div>
+                                    <span class="detail-num">{{info.events.eventsServiceRetail.count || 0}}个</span>
+                                </div>
+                                <ul class="detail-list">
+                                    <li class="detail-item" v-for="(item,index) in info.events.eventsServiceRetail.desc" :key="index" v-if="!!item.value">{{item.value}}</li>
+                                    <li class="color-description" v-else>无</li>
+                                </ul>
                             </div>
-                            <ul class="detail-list">
-                                <li class="detail-item" v-for="(item,index) in info.events.eventsServiceRetail.desc" :key="index" v-if="!!item.value">{{item.value}}</li>
-                                <li class="color-description" v-else>无</li>
-                            </ul>
-                        </div>
-                        <div class="wrap-detail">
-                            <div class="detail-header">
-                                <span class="detail-title">平台域</span>
-                                <div class="detail-bar" :style="'width:'+ (+info.events.eventsServiceApart.count/info.maxCount*300) +'px'"></div>
-                                <span class="detail-num">{{info.events.eventsServiceApart.count || 0}}个</span>
+                            <div class="wrap-detail">
+                                <div class="detail-header">
+                                    <span class="detail-title">平台域</span>
+                                    <div class="detail-bar" :style="'width:'+ (+info.events.eventsServiceApart.count/info.maxCount*300) +'px'"></div>
+                                    <span class="detail-num">{{info.events.eventsServiceApart.count || 0}}个</span>
+                                </div>
+                                <ul class="detail-list">
+                                    <li class="detail-item" v-for="(item,index) in info.events.eventsServiceApart.desc" :key="index" v-if="!!item.value">{{item.value}}</li>
+                                    <li class="color-description" v-else>无</li>
+                                </ul>
                             </div>
-                            <ul class="detail-list">
-                                <li class="detail-item" v-for="(item,index) in info.events.eventsServiceApart.desc" :key="index" v-if="!!item.value">{{item.value}}</li>
-                                <li class="color-description" v-else>无</li>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -686,6 +696,7 @@ export default {
                 </ul>
             </div>
         </div>
+        <div class="canvas-img" v-show="!isInputPage" ref="canvasImg"></div>
     </div>
     <div class="wrap-bottom">有问题请联系@Apollo-zz</div>
     <div class="mask" v-if="isResetMask">

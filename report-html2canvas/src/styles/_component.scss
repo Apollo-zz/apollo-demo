@@ -182,22 +182,76 @@ body{
 }
 .wrap-inner{
     position: relative;
-    background: #fff;
+    background: #fff!important;
     border-radius: 4px;
-    box-shadow: 0 0 10px rgba(201,201,201,0.5);
+    // box-shadow: 0 0 10px rgba(201,201,201,0.5);
     margin-left: 6px;
+    // padding-top: 50px;
+    &::after{
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 1;
+        @include translate(-50%,-50%);
+        // width: 105%;
+        // height: 105%;
+        // background: #000;
+        @include background("../assets/images/shadow.png",105%,108%);
+        opacity: 0.5;
+        background-size: 100% 100%;
+    }
+    &.yellow{
+        .inner-tips{
+            background: $color-yellow;
+            &:before{
+                border-right-color: darken($color-yellow,15%);
+            }
+        }
+        .detail-bar{
+            background: lighten($color-yellow, 30%);
+        }
+    }
+    &.red{
+        .inner-tips{
+            background: $color-red;
+            &:before{
+                border-right-color: darken($color-red,15%);
+            }
+        }
+        .detail-bar{
+            background: lighten($color-red, 30%);
+        }
+    }
+}
+.list{
+    position: relative;
+    z-index: 2;
+    background: #fff;
     padding-top: 50px;
+    border-radius: 4px;
 }
 .inner-tips{
     position: absolute;
     left: -6px;
     top: 15px;
+    z-index: 3;
     padding: 0 40px 0 20px;
     background: $color-green;
     line-height: 30px;
     color: #fff;
     border-radius:  0 15px 15px 0;
-    box-shadow: 0 2px 10px rgba(182,182,182,0.5);
+    // &:after{
+    //     content: "";
+    //     position: absolute;
+    //     top: 0;
+    //     left: 0;
+    //     z-index: -1;
+    //     // @include background("../assets/images/shadow-sm.png",105%,108%);
+    //     // opacity: 0.5;
+    //     background-size: 100% 100%;
+    // }
+    // box-shadow: 0 2px 10px rgba(182,182,182,0.5);
     &.yellow{
         &:before{
             border-right-color: darken($color-yellow,15%);
@@ -238,13 +292,9 @@ body{
     min-width: 2px!important;
     height: 20px;
     border-radius: 4px;
-    background: #b3c5ff;
-    // background: lighten($color-green, 50%);
+    background: lighten($color-green, 30%);
     vertical-align: middle;
     margin: 0 5px;
-}
-.detail-num{
-    // color: $color-theme;
 }
 .detail-list{
     margin-top: 5px;
@@ -396,4 +446,12 @@ body{
     text-align: center;
     font-size: 12px;
     color: #ccc;
+}
+.canvas-img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 30;
+    width: 100%;
+    height: 100%;
 }
