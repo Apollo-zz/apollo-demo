@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>每日运营简报</title>
+    <link href="./static/css/app.14d18c29cc294c6caeaa851e87389694.css" rel="stylesheet">
+</head>
+
+<body>
+    <div>
+        <div class="page-header">
+            <div class="page-header-inner">
+                每日运营简报
+                <div class="el-rt">
+                    <div>
+                        <div class="btn btn-border">重置参数</div>
+                        <div class="btn">生成图片</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wrap-page">
+            <div class="bg">
+                <div class="bg-top"></div>
+                <div class="bg-bottom"></div>
+            </div>
+            <div class="wrap-page-input wrap-container">
+                <label class="input-label">
+                    <span class="input-title">简报日期</span>
+                    <input type="date" placeholder="请输入简报日期" pattern="yyyy/mm/dd" class="input">
+                </label>
+                <div class="divider-title">灰度关键子系统</div>
+                <label class="input-label">
+                    <span class="input-title">零售域</span>
+                    <textarea type="text" placeholder="请输入发布的子系统名称，使用‘&amp;’分割，例如web-pub&amp;web-pmb" class="input"></textarea>
+                </label>
+                <label class="input-label">
+                    <span class="input-title">平台域</span>
+                    <textarea type="text" placeholder="请输入发布的子系统名称，使用‘&amp;’分割，例如web-pub&amp;web-pmb" class="input"></textarea>
+                </label>
+                <div class="divider-title">全量关键子系统</div>
+                <label class="input-label">
+                    <span class="input-title">零售域</span>
+                    <textarea type="text" placeholder="请输入发布的子系统名称，使用‘&amp;’分割，例如web-pub&amp;web-pmb" class="input"></textarea>
+                </label>
+                <label class="input-label">
+                    <span class="input-title">平台域</span>
+                    <textarea type="text" placeholder="请输入发布的子系统名称，使用‘&amp;’分割，例如web-pub&amp;web-pmb" class="input"></textarea>
+                </label>
+                <div class="divider-title">处理告警事件单量</div>
+                <label class="input-label">
+                    <span class="input-title">零售域单量</span>
+                    <input type="number" placeholder="请输入零售域处理告警事件单量" class="input">
+                </label>
+                <label class="input-label">
+                    <span class="input-title">零售域描述</span>
+                    <input type="text" placeholder="请输入一条零售域相关描述" class="input">
+                    <span class="icon-add"></span>
+                </label>
+                <label class="input-label">
+                    <span class="input-title">平台域单量</span>
+                    <input type="number" placeholder="请输入平台域处理告警事件单量" class="input">
+                </label>
+                <label class="input-label">
+                    <span class="input-title">平台域描述</span>
+                    <input type="text" placeholder="请输入一条平台域相关描述" class="input">
+                    <span class="icon-add"></span>
+                </label>
+                <div class="divider-title">关闭事件单量</div>
+                <label class="input-label">
+                    <span class="input-title">零售域单量</span>
+                    <input type="number" placeholder="请输入零售域关闭事件单量单量" class="input">
+                </label>
+                <label class="input-label">
+                    <span class="input-title">零售域描述</span>
+                    <input type="text" placeholder="请输入一条零售域相关描述" class="input">
+                    <span class="icon-add"></span>
+                </label>
+                <label class="input-label">
+                    <span class="input-title">平台域单量</span>
+                    <input type="number" placeholder="请输入平台域关闭事件单量单量" class="input">
+                </label>
+                <label class="input-label">
+                    <span class="input-title">平台域描述</span>
+                    <input type="text" placeholder="请输入一条平台域相关描述" class="input">
+                    <span class="icon-add"></span>
+                </label>
+                <div class="divider-title">待跟进事件单量</div>
+                <label class="input-label">
+                    <span class="input-title">零售域单量</span>
+                    <input type="number" placeholder="请输入零售域待跟进事件单量单量" class="input">
+                </label>
+                <label class="input-label">
+                    <span class="input-title">零售域描述</span>
+                    <input type="text" placeholder="请输入一条零售域相关描述" class="input">
+                    <span class="icon-add"></span>
+                </label>
+                <label class="input-label">
+                    <span class="input-title">平台域单量</span>
+                    <input type="number" placeholder="请输入平台域待跟进事件单量单量" class="input">
+                </label>
+                <label class="input-label">
+                    <span class="input-title">平台域描述</span>
+                    <input type="text" placeholder="请输入一条平台域相关描述" class="input">
+                    <span class="icon-add"></span>
+                </label>
+                <div class="divider-title">处理服务请求单量</div>
+                <label class="input-label">
+                    <span class="input-title">零售域单量</span>
+                    <input type="number" placeholder="请输入零售域处理服务请求单量单量" class="input">
+                </label>
+                <label class="input-label">
+                    <span class="input-title">零售域描述</span>
+                    <input type="text" placeholder="请输入一条零售域相关描述" class="input">
+                    <span class="icon-add"></span>
+                </label>
+                <label class="input-label">
+                    <span class="input-title">平台域单量</span>
+                    <input type="number" placeholder="请输入平台域处理服务请求单量单量" class="input">
+                </label>
+                <label class="input-label">
+                    <span class="input-title">平台域描述</span>
+                    <input type="text" placeholder="请输入一条平台域相关描述" class="input">
+                    <span class="icon-add"></span>
+                </label>
+                <div class="divider-title">其他关注事项</div>
+                <label class="input-label">
+                    <span class="input-title">其他关注事项</span>
+                    <input type="text" placeholder="请输入一条其他关注事项" class="input">
+                    <span class="icon-add"></span>
+                </label>
+            </div>
+            <!---->
+        </div>
+        <div class="wrap-bottom">有问题请联系@Apollo-zz</div>
+        <!---->
+        <!---->
+    </div>
+    <script type="text/javascript" src="./static/js/manifest.3ad1d5771e9b13dbdad2.js"></script>
+    <script type="text/javascript" src="./static/js/vendor.c355f80ec04da4d28e8e.js"></script>
+    <script type="text/javascript" src="./static/js/app.e7760d403f69b5f76db2.js"></script>
+</body>
+
+</html>
