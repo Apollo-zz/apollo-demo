@@ -252,6 +252,7 @@ export default {
         // 生成图片
         createPic(){
             let countArr = [];
+            this.href = '';
             for (let key of Object.keys(this.info.events)) {
                 countArr.push(+this.info.events[key].count);
             }
@@ -272,13 +273,14 @@ export default {
             localStorage.setItem(`reportData${this.info.time}`,JSON.stringify(this.info));
             setTimeout(()=>{
                 const el = this.$refs.print;
-                const canvasImg = this.$refs.canvasImg;
+                // const canvasImg = this.$refs.canvasImg;
                 html2canvas(el).then(canvas => {
-                    canvasImg.appendChild(canvas);
+                    // canvasImg.appendChild(canvas);
                     this.href=canvas.toDataURL("image/png");
                     this.download =`运营简报${this.info.time}`;
                 });
             },200);
+            
         },
         // 增加多项
         addDesc(type){
@@ -696,8 +698,9 @@ export default {
                 </ul>
             </div>
         </div>
-        <div class="canvas-img" v-show="!isInputPage" ref="canvasImg"></div>
+        <img class="canvas-img" v-show="!isInputPage && !!href" :src="href"/>
     </div>
+    
     <div class="wrap-bottom">有问题请联系@Apollo-zz</div>
     <div class="mask" v-if="isResetMask">
         <div class="pop">
