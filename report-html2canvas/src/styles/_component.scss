@@ -71,7 +71,7 @@ body{
     width: 1000px;
     margin: 0 auto;
     background: #fff;
-    padding: 30px 20px;
+    padding: 50px 20px;
     overflow: hidden;
 }
 .bg{
@@ -141,7 +141,7 @@ body{
     z-index: 2;
 }
 .wrap-page-header{
-    padding: 0 0 24px;
+    padding: 0 0 34px;
     text-align: center;
 }
 .header-title{
@@ -454,4 +454,44 @@ body{
     z-index: 30;
     width: 100%;
     height: 100%;
+    // display: none;
+}
+.wrap-combo{
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    z-index: 10;
+    background: $color-theme;
+    height: 50px;
+    padding-left: 150px;
+    border-radius: 25px;
+    padding-right: 20px;
+    &:after{
+        content: "";
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        background: $color-theme;
+    }
+}
+.combo{
+    position: absolute;
+    left: 0;
+    top: -40px;
+    z-index: 10;
+    @include background("../assets/images/cup.png",350px,160px);
+    // background-size: 100% 100%;
+    @include transform(scale(0.5));
+    @include transform-origin(left,top);
+    overflow: auto;
+
+}
+.combo-num{
+    font-size: 40px;
+    color: #FEB236;
+    font-family: krungthep;
+    line-height: 50px;
+    margin-top: -2px;
+    // margin-left: -20px;
+    // -webkit-text-stroke: 2px #fff;
 }

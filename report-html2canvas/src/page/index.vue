@@ -531,6 +531,8 @@ export default {
                 <h2 class="header-title">运维简报</h2>
                 <div class="header-time">{{info.time}}</div>
             </header>
+            <div class="wrap-combo"><div class="combo"></div><div class="combo-num">120</div>
+</div>
             <div class="display-flex">
                 <div class="flex wrap-container">
                     <h3 class="container-title">灰度关键子系统</h3>
