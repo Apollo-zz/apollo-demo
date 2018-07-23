@@ -1,0 +1,105 @@
+@charset "UTF-8";
+
+body,html{
+    width: 100%;
+    height: 100%;
+    background: #77baff;
+    min-width: 1000px;
+}
+body{
+    padding-top: 60px;
+}
+.text-left {
+    text-align: left!important;
+}
+// 浏览器滚动条
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius:10px;
+    background:rgba(0,0,0,0.2);
+}
+  
+  
+  .box{
+    margin: 10px auto;
+  }
+  $width: 400px;
+  $color: #fff;
+  $circle: 8px;
+  
+  .stamp{
+    position: relative;
+    width: $width;
+    border-radius: 10px;
+    padding: $circle + 10;
+    overflow: hidden;
+    -webkit-filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+    filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+    background: radial-gradient(
+      transparent $circle,
+      $color 4px,
+      $color
+    );
+    background-size: $width $width;
+    background-position: $width/2;
+    &::before, &::after{
+      content: "";
+      position: absolute;
+      left: 0;
+      z-index: -1;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: $color;
+      -webkit-transform: translateY(-50%);
+      transform: translateY(-50%);
+    }
+    &::before{
+      top: 0;
+      margin-top: -$circle*2;
+    }
+    &::after{
+      top: 100%;
+      margin-top: $circle*2;
+      
+    }
+  }
+  .stamp-apart{
+    width: $width;
+    -webkit-filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+    filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+  }
+  .stamp-inner{
+    padding: $circle + 10;
+    background: $color;
+    box-sizing: border-box;
+  }
+  .stamp-top{
+    border-radius: 10px 10px 0 0;
+    padding-bottom: 0;
+  }
+  .stamp-bottom{
+    border-radius: 0 0 10px 10px;
+    padding-top: 0;
+  }
+  .stamp-center{
+    width: $width;
+    height: $circle*2;
+    overflow: hidden;
+    background: radial-gradient(
+      transparent $circle,
+      $color 1px
+    );
+    padding: $circle + 6;
+    background-size: $width $width;
+    background-position: $width/2;
+    &::before{
+      content: '';
+      display: block;
+      margin: 0 6px;
+      border-top: 1px dashed #e4e4e4;
+    }
+  }

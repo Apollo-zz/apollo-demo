@@ -155,6 +155,7 @@ export default {
                 allSystemRetail: '',
                 allSystemApart: '',
             },
+            notices: []
         }
     },
     created(){
@@ -168,7 +169,17 @@ export default {
             this.value.allSystemApart = this.info.allSystemApart.join('&');
         }
     },
+    filters: {
+        
+    },
     methods: {
+        replaceEnter(input){
+            if(!input){
+                return;
+            }else{
+                return input.replace(/\\n/g,'<br/>');
+            }
+        },
         // 重置参数
         clearData(){
             this.isResetMask = false;
@@ -269,6 +280,13 @@ export default {
             if(!!this.value.allSystemApart){
                  this.info.allSystemApart = this.value.allSystemApart.split('&');
             }
+            this.notices = [];
+            this.info.otherNotices.forEach((item,index)=>{
+                let itemNew = this.replaceEnter(item.value);
+                this.notices.push({
+                    value: itemNew
+                })
+            })
             this.isInputPage = false;
             localStorage.setItem(`reportData${this.info.time}`,JSON.stringify(this.info));
             setTimeout(()=>{
@@ -327,7 +345,7 @@ export default {
         },
         changeColor(string,color){
             this.info[string] = color;
-        }
+        },
     }
 }
 </script>
@@ -521,7 +539,7 @@ export default {
             </div>
             <label class="input-label" v-for="(item,index) in info.otherNotices" :key="index">
                 <span class="input-title">{{index == 0 ? '其他关注事项' : ''}}</span>
-                <input class="input" type="text" v-model="item.value" placeholder="请输入一条其他关注事项">
+                <textarea class="input" type="text" v-model="item.value" placeholder="请输入一条其他关注事项，可使用\n换行"></textarea>
                 <span class="icon-add" v-if="index == 0" @click="addDesc('otherNotices')"></span>
                 <span class="icon-delete" v-else @click="showDeteleMask('otherNotices',index)"></span>
             </label>
@@ -531,8 +549,7 @@ export default {
                 <h2 class="header-title">运维简报</h2>
                 <div class="header-time">{{info.time}}</div>
             </header>
-            <div class="wrap-combo"><div class="combo"></div><div class="combo-num">120</div>
-</div>
+            <!-- <div class="wrap-combo"><div class="combo"></div><div class="combo-num">120</div></div> -->
             <div class="display-flex">
                 <div class="flex wrap-container">
                     <h3 class="container-title">灰度关键子系统</h3>
@@ -695,7 +712,7 @@ export default {
             <div class="wrap-container">
                 <h3 class="container-title">其他关注事项</h3>
                 <ul class="detail-list secondary">
-                    <li class="detail-item" v-for="(item,index) in info.otherNotices" :key="index" v-if="!!item.value">{{item.value}}</li>
+                    <li class="detail-item" v-for="(item,index) in notices" :key="index" v-if="!!item.value" v-html="item.value"></li>
                     <li class="color-description" v-else>无</li>
                 </ul>
             </div>
@@ -703,7 +720,7 @@ export default {
         <img class="canvas-img" v-show="!isInputPage && !!href" :src="href"/>
     </div>
     
-    <div class="wrap-bottom">有问题请联系@Apollo-zz</div>
+    <div class="wrap-bottom">有问题请联系@apollozhang</div>
     <div class="mask" v-if="isResetMask">
         <div class="pop">
             <div class="pop-content">
