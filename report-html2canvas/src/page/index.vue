@@ -13,6 +13,7 @@ export default {
             isInputPage: true,
             info: {
                 time: '',
+                comboDays: '',
                 partSystemRetail: [],
                 partSystemApart: [],
                 allSystemRetail: [],
@@ -169,9 +170,6 @@ export default {
             this.value.allSystemApart = this.info.allSystemApart.join('&');
         }
     },
-    filters: {
-        
-    },
     methods: {
         replaceEnter(input){
             if(!input){
@@ -289,10 +287,13 @@ export default {
             })
             this.isInputPage = false;
             localStorage.setItem(`reportData${this.info.time}`,JSON.stringify(this.info));
+            let scale = window.devicePixelRatio > 2 ? window.devicePixelRatio : 2;
             setTimeout(()=>{
                 const el = this.$refs.print;
                 // const canvasImg = this.$refs.canvasImg;
-                html2canvas(el).then(canvas => {
+                html2canvas(el,{
+                    scale: scale
+                }).then(canvas => {
                     // canvasImg.appendChild(canvas);
                     this.href=canvas.toDataURL("image/png");
                     this.download =`运营简报${this.info.time}`;
@@ -376,6 +377,10 @@ export default {
                 <span class="input-title">简报日期</span>
                 <input class="input" type="date" v-model="info.time" placeholder="请输入简报日期" pattern="yyyy/mm/dd">
             </label>
+            <!-- <label class="input-label">
+                <span class="input-title">零事故</span>
+                <input class="input" type="num" v-model="info.comboDays" placeholder="请输入连续零事故天数">
+            </label> -->
             <!-- 子系统 -->
             <div class="wrap-divider-title">
                 <span class="divider-title" :class="info.partSystemRetailColor">灰度关键子系统-零售域</span>
@@ -549,7 +554,7 @@ export default {
                 <h2 class="header-title">运维简报</h2>
                 <div class="header-time">{{info.time}}</div>
             </header>
-            <!-- <div class="wrap-combo"><div class="combo"></div><div class="combo-num">120</div></div> -->
+            <!-- <div class="wrap-combo"><div class="combo"></div><div class="combo-num">{{info.comboDays}}</div></div> -->
             <div class="display-flex">
                 <div class="flex wrap-container">
                     <h3 class="container-title">灰度关键子系统</h3>

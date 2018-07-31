@@ -11,12 +11,12 @@ export default new Router({
         {
             path: '/',
             name: 'index',
-            component: index
+            component: demo
         },
         {
             path: '/demo',
             name: 'demo',
-            component: index
+            component: demo
         },
     ]
 })
