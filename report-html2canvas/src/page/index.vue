@@ -156,7 +156,8 @@ export default {
                 allSystemRetail: '',
                 allSystemApart: '',
             },
-            notices: []
+            notices: [],
+            inputValidShow: false
         }
     },
     created(){
@@ -260,6 +261,11 @@ export default {
         },
         // 生成图片
         createPic(){
+            console.log(">>>",this.info.comboDays == undefined);
+            if(this.info.comboDays == '' || this.info.comboDays == undefined){
+                this.inputValidShow = true;
+                return;
+            }
             let countArr = [];
             this.href = '';
             for (let key of Object.keys(this.info.events)) {
@@ -550,13 +556,15 @@ export default {
             </label>
         </div>
         <div class="wrap-page-content" v-else-if="!isInputPage">
-            <header class="wrap-page-header" :class="{'active':info.comboDays > 0}">
+            <header class="wrap-page-header" :class="{'active':true}">
                 <h2 class="header-title">运维简报</h2>
                 <div class="header-time">{{info.time}}</div>
             </header>
             <div class="wrap-combo-new" v-if="info.comboDays > 0">
                 <div class="combo-num bottom">{{info.comboDays}}<span class="combo-day">天</span></div>
                 <div class="combo-num">{{info.comboDays}}<span class="combo-day">天</span></div>
+            </div>
+            <div class="wrap-error" v-else>
             </div>
             <div class="display-flex">
                 <div class="flex wrap-container">
@@ -748,6 +756,16 @@ export default {
             <div class="wrap-btn">
                 <div class="pop-btn color-theme" @click="isDeleteMask = false">取消</div>
                 <div class="pop-btn" @click="deleteDesc()">确定</div>
+            </div>
+        </div>
+    </div>
+    <div class="mask" v-if="inputValidShow">
+        <div class="pop">
+            <div class="pop-content">
+                请输入连续零事故天数！
+            </div>
+            <div class="wrap-btn">
+                <div class="pop-btn color-theme" @click="inputValidShow = false">确认</div>
             </div>
         </div>
     </div>
